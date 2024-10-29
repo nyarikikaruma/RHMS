@@ -86,6 +86,9 @@
                             <th scope="col" class="px-6 py-3">
                                 QR Code
                             </th>
+                            <th scope="col" class="px-6 py-3">
+                                Role
+                            </th>
                             <th scope="col" class="p-4">
                                 Actions
                             </th>
@@ -114,6 +117,9 @@
                                     <path stroke-linecap="round" stroke-linejoin="round"
                                         d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" />
                                 </svg>
+                            </td>
+                            <td class="px-6 py-4">
+                                Admin
                             </td>
                             <td class="p-4 space-x-2 whitespace-nowrap flex">
                                 <select @change="toggleUserActions" id="countries"
@@ -242,14 +248,14 @@
                     class="flex fixed inset-0 z-50 items-center justify-center overflow-x-hidden overflow-y-auto top-4 md:inset-0 h-modal sm:h-full">
                     <div class="relative p-4 w-full max-w-md max-h-full">
                         <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-                            <button @click="toggleDelete" type="button"
+                            <button @click="toggleDelete = !toggleDelete" type="button"
                                 class="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white">
                                 <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                                     viewBox="0 0 14 14">
                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                                         stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
                                 </svg>
-                                <span class="sr-only">Close modal</span>
+                                <span class="sr-only">Close</span>
                             </button>
                             <div class="p-4 md:p-5 text-center">
                                 <svg class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" aria-hidden="true"
@@ -263,7 +269,7 @@
                                     class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
                                     Yes, I'm sure
                                 </button>
-                                <button @click="toggleDelete" type="button"
+                                <button @click="toggleDelete = !toggleDelete" type="button"
                                     class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">No,
                                     cancel</button>
                             </div>
@@ -366,6 +372,38 @@
                         </div>
                     </div>
                 </div>
+                <div v-if="elevate"
+                    class="flex fixed inset-0 z-50 items-center justify-center overflow-x-hidden overflow-y-auto top-4 md:inset-0 h-modal sm:h-full">
+                    <div class="relative p-4 w-full max-w-md max-h-full">
+                        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                            <button @click="elevate = !elevate" type="button"
+                                class="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white">
+                                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                    viewBox="0 0 14 14">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                                </svg>
+                                <span class="sr-only">Close</span>
+                            </button>
+                            <div class="p-4 md:p-5 text-center">
+                                <svg class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                                </svg>
+                                <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Are you sure you
+                                    want to Elevate this user?</h3>
+                                <button @click="elevate = !elevate" type="button"
+                                    class="text-white bg-green-600 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
+                                    Yes, I'm sure
+                                </button>
+                                <button @click="elevate = !elevate" type="button"
+                                    class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">No,
+                                    cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -403,17 +441,26 @@ function toggleUserActions(e) {
 }
 function handleUserElevation(e) {
     const value = e.target.value
-    if (value == 1) {
-        elevate.value = !elevate.value
-    } if (value == 2) {
-        superAdmin.value = !superAdmin.value
-    } if (value == 3) {
-        dataManager.value = !dataManager.value
-    } if (value == 4) {
-        shiftLeader.value = !shiftLeader.value
-    }
+    elevate.value = !elevate.value
+
+    // if (value == 1) {
+    //     elevate.value = !elevate.value
+    // } if (value == 2) {
+    //     superAdmin.value = !superAdmin.value
+    // } if (value == 3) {
+    //     dataManager.value = !dataManager.value
+    // } if (value == 4) {
+    //     shiftLeader.value = !shiftLeader.value
+    // }
 
 }
+
+onMounted(async () => {
+    const { data } = await useFetch('/api/users')
+    console.log('our Keyboardists are: ', data.value);
+
+
+})
 
 </script>
 
